@@ -66,8 +66,13 @@ def scan(
 
     console.print(table)
     console.print(
-        f"[bold]Score:[/bold] {report.summary.score}% "
+        f"[bold]Overall readiness:[/bold] {report.summary.score}% "
         f"({report.summary.passed_checks}/{report.summary.total_checks} checks passed)"
+    )
+    console.print(
+        f"[bold]Evidence readiness:[/bold] {report.summary.evidence_readiness_score}% "
+        f"({report.summary.evidence_ready_checks}/{report.summary.evidence_checks} "
+        "EvidenceOps checks passed)"
     )
     console.print(f"[bold]Markdown:[/bold] {markdown_path}")
     console.print(f"[bold]JSON:[/bold] {json_path}")
