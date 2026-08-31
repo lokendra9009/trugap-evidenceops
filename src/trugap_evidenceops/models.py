@@ -55,10 +55,21 @@ class RuleResult(BaseModel):
 
 
 class ScoreSummary(BaseModel):
+    """Readiness counts for a single scan.
+
+    ``score`` covers every check in the scan. The ``evidence_*`` fields cover
+    only the ``EVIDENCE_OPS`` checks, so the two readiness signals can be read
+    independently.
+    """
+
     total_checks: int
     passed_checks: int
     failed_checks: int
     score: int
+
+    evidence_checks: int
+    evidence_ready_checks: int
+    evidence_readiness_score: int
 
 
 class ScanReport(BaseModel):

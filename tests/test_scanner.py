@@ -24,6 +24,8 @@ def test_scanner_passes_when_expected_evidence_exists(tmp_path: Path) -> None:
 
     assert report.summary.total_checks == 8
     assert report.summary.score == 100
+    assert report.summary.evidence_checks == 1
+    assert report.summary.evidence_readiness_score == 100
     assert all(result.passed for result in report.results)
 
 
@@ -45,6 +47,9 @@ def test_scanner_reports_missing_items_and_workflow_permissions(tmp_path: Path) 
     assert results["security_md_exists"].passed is False
     assert results["dependabot_config_exists"].passed is False
     assert report.summary.score == 12
+    assert report.summary.evidence_checks == 1
+    assert report.summary.evidence_ready_checks == 0
+    assert report.summary.evidence_readiness_score == 0
 
 
 def _write(path: Path, content: str) -> None:
