@@ -60,6 +60,31 @@ The scanner currently checks for:
 - Explicit `permissions:` declarations in GitHub Actions workflows
 - Evidence tracker file
 
+## Scanning this repository
+
+We run the scanner against its own repository. At the time of writing it reports
+five of eight checks passing, with evidence readiness at 100%.
+
+Three checks are deliberately left failing rather than closed with placeholder
+documents:
+
+- **Policy folder** — there is no organisation here to hold policies.
+- **Incident response document** — vulnerability handling is covered by `SECURITY.md`.
+- **Backup or recovery runbook** — the scanner holds no state, so there is nothing
+  to back up.
+
+Closing those with generated templates would raise the score while describing
+controls nobody operates, which is the failure mode this scanner exists to
+surface. The reasoning for each is recorded in
+[`docs/evidence/tracker.md`](docs/evidence/tracker.md).
+
+All three share a cause worth stating plainly: the v0.1 rule set assumes the
+scanned repository belongs to a SaaS company with staff, production
+infrastructure, and customer data. Applied to a library or CLI, those checks
+measure something that is not true of the target rather than something the target
+is missing. Adding repository context, and a way to accept a gap with a recorded
+reason, is future work.
+
 ## Development
 
 Run tests:
